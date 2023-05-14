@@ -1,0 +1,134 @@
+{% extends 'adminbase.html' %}
+
+{% load static %}
+
+
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <style type="text/css">
+    a:link {
+      text-decoration: none;
+    }
+
+    .order-card {
+      color: #fff;
+    }
+
+    .bg-c-blue {
+      background: linear-gradient(45deg, #4099ff, #597481);
+    }
+
+    .bg-c-green {
+      background: linear-gradient(45deg, #2ed8b6, #597481);
+    }
+
+    .bg-c-yellow {
+      background: linear-gradient(45deg, #FFB64D, #597481);
+    }
+
+    .bg-c-pink {
+      background: linear-gradient(45deg, #FF5370, #597481);
+    }
+
+
+    .card {
+      border-radius: 5px;
+      -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+      border: none;
+      margin-bottom: 30px;
+      -webkit-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .card .card-block {
+      padding: 25px;
+    }
+
+    .order-card i {
+      font-size: 26px;
+    }
+
+    .f-left {
+      float: left;
+    }
+
+    .f-right {
+      float: right;
+    }
+  </style>
+</head>
+
+<body>
+    <h3 style = "margin-bottom: 20px;text-align: center">
+        <strong>Thống kê dữ liệu</strong>
+    </h3>
+    
+    <div style="height: 70%; margin-left: 300px;">
+        <canvas width="700px" height="500px" id="myChart"></canvas>
+    </div>
+      
+    <script>
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: [{% for label in labels %} '{{label}}', {% endfor %}],
+            datasets: [{
+              label: '# of data',
+              data: [{% for i in data %} '{{i}}', {% endfor %}],
+              backgroundColor: [
+                "rgba(255,26,104,0.6)",
+                "rgba(54, 162, 235, 0.6)",
+                "rgba(255, 206, 86, 0.6)",
+                "rgba(75, 192, 192, 0.6)",
+                "rgba(153, 102, 255, 0.6)",
+                "rgba(0, 0, 0, 0.4)",
+              ],
+              borderWidth: 2
+            }]
+          },
+          options: {
+            responsive: false,
+            animation: {
+              onComplete: function() {
+                delayed: true;
+              },
+              delay: function(context) {
+                let delay = 0;
+                if (context.type === 'data' && context.mode === 'default' ) {
+                  delay = context.dataIndex * 300 + context.datasetIndex;
+                }
+                return delay;
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+    </script>
+
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+
+  </script>
+</body>
+
+</html>
+{% endblock content %}

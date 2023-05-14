@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Khoa(models.Model):
@@ -8,6 +9,7 @@ class Khoa(models.Model):
         return self.ten_khoa
 
 class GiaoVien(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     ten_giao_vien = models.CharField(max_length=100)
     ngay_sinh = models.DateField()
     khoa = models.ForeignKey(Khoa, on_delete=models.CASCADE)
@@ -28,6 +30,7 @@ class Lop(models.Model):
         return self.ten_lop
 
 class SinhVien(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE, null=True)
     ten_sinh_vien = models.CharField(max_length=100)
     gioi_tinh = models.CharField(max_length=10)
     ngay_sinh = models.DateField()
@@ -38,8 +41,8 @@ class SinhVien(models.Model):
 class Diem(models.Model):
     mon_hoc = models.ForeignKey(MonHoc, on_delete=models.CASCADE)
     sinh_vien = models.ForeignKey(SinhVien, on_delete=models.CASCADE)
-    diem_chuyen_can = models.FloatField()
-    diem_giua_ki = models.FloatField()
-    diem_cuoi_ki = models.FloatField()
+    diem_chuyen_can = models.FloatField(null=True, default=0)
+    diem_giua_ki = models.FloatField(null=True, default=0)
+    diem_cuoi_ki = models.FloatField(null=True, default=0)
     def __str__(selft):
         return selft.mon_hoc.ten_mon_hoc + " - " + selft.sinh_vien.ten_sinh_vien

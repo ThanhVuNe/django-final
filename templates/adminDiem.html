@@ -1,0 +1,75 @@
+{% extends 'adminbase.html' %}
+
+
+
+{% block content %}
+
+<head>
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+    h6{
+      text-align:center;
+    }
+    .row{
+      margin:100px;
+    }
+  </style>
+
+</head>
+
+
+
+<!--
+written By : sumit kumar
+-->
+
+<div class="container">
+
+    	<div class="row" >
+
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h6 class="panel-title">Thông tin về điểm sinh viên</h6>
+
+					</div>
+
+					<table class="table table-hover table-striped table-bordered" id="dev-table">
+            <thead>
+
+                <tr>
+                    <th>Sinh viên</th>
+                    <th>Môn học</th>
+                    <th>Điểm chuyên cần</th>
+                    <th>Điểm giữa kì</th>
+                    <th>Điểm cuối kì</th>
+                </tr>
+            </thead>
+            {% for i in score %}
+              <tr>
+                  <td> {{i.sinh_vien}}</td>
+                  <td>{{i.mon_hoc}}</td>
+                    <td>{{i.diem_chuyen_can}}</td>
+                    <td>{{i.diem_giua_ki}}</td>
+                    <td>{{i.diem_cuoi_ki}}</td>
+              </tr>
+
+            {% endfor %}
+					</table>
+				</div>
+
+
+				</div>
+			</div>
+
+
+
+
+
+{% endblock content %}
